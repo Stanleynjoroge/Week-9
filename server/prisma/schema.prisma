@@ -1,0 +1,99 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+//please follow the prisma  documentation it really helped me get started.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// Define a model for the Ticket table
+model Ticket {
+  id          Int          @id @default(autoincrement())
+  title       String
+  description String
+  status      TicketStatus @default(TO_DO)
+  createdAt   DateTime     @default(now())
+
+  // Define relationships with other tables
+  project   Project   @relation(fields: [projectId], references: [id])
+  projectId Int
+  comments  Comment[]
+
+  // Define assignees as a many-to-many relation to User model
+  assignees User[] @relation("AssignedTickets")
+
+  createdByUser   User? @relation("CreatedTickets", fields: [createdByUserId], references: [id])
+  createdByUserId Int?
+}
+
+// Define a model for the User table
+model User {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  email     String   @unique
+  password  String
+  role      String
+  createdAt DateTime @default(now())
+
+  // Define a many-to-many relationship with Ticket for assigned tickets
+  assignedTickets Ticket[] @relation("AssignedTickets")
+
+  // Define a one-to-many relationship with Ticket for created tickets
+  createdTickets Ticket[]  @relation("CreatedTickets")
+  Comment        Comment[]
+}
+
+// Define a model for the Project table
+model Project {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String?
+  startDate   DateTime  @default(now())
+  endDate     DateTime  @default(now())
+  createdAt   DateTime  @default(now())
+
+  // Define a one-to-many relationship with Ticket for tickets associated with this project
+  tickets Ticket[]
+}
+
+// Define a model for the Comment table
+model Comment {
+  id        Int      @id @default(autoincrement())
+  content   String
+  createdAt DateTime @default(now())
+
+  // Define relationships with other tables
+  ticket   Ticket @relation(fields: [ticketId], references: [id])
+  ticketId Int
+  user     User   @relation(fields: [userId], references: [id])
+  userId   Int
+}
+
+// Define the TicketStatus enum
+enum TicketStatus {
+  TO_DO   
+  ONGOING
+  RESOLVED
+}
+
+// Define a model for the Assignee table (if needed)
+// This could be useful if you want to track which users are assigned to which tickets
+// For simplicity, I've included the 'assignedTickets' relation directly in the User model above
+//    model Assignee {
+//    id          Int      @id @default(autoincrement())
+//    userId      Int
+//    ticketId    Int
+//    createdAt   DateTime @default(now())
+
+//   // Define relationships with other tables
+//    user        User     @relation(fields: [userId], references: [id])
+//    ticket      Ticket   @relation(fields: [ticketId], references: [id])
+//}
