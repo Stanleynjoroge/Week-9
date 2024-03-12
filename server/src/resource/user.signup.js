@@ -1,13 +1,14 @@
-// user.js
+
 
 import express from 'express';
 import { generateToken, hashPassword } from '../utils/auth.js';
-import {PrismaClient} from '@prisma/client';
 import { checkSchema} from 'express-validator';
 import { validateSchema } from '../middle_wares/middlware.data.js';
 import { registrationSchema } from '../validators/user.validator.js';
 
 const router = express.Router();
+
+import {PrismaClient} from '@prisma/client';
 const prisma = new PrismaClient();
 
 // Register user route

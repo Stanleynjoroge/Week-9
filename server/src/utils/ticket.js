@@ -1,8 +1,7 @@
 // projectService.js
 
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
-
+import  {PrismaClient} from '@prisma/client'
+const prisma = new PrismaClient()
 // Function to add a new project
 export const addProject = async (name, description) => {
     try {
