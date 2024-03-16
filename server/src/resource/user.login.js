@@ -9,7 +9,7 @@ const prisma = new PrismaClient();
 
 
 router.post('/', checkSchema(loginSchema), validateSchema, async(req,res)=>{
-    const data = req.formdata
+    const data = req.data
     try {
         if (!data.username || !data.password) {
             return res.status(400).json({ message: "Username and password are required" });

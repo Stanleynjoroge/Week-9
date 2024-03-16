@@ -23,7 +23,7 @@ app.use(cookieParser())
 app.use(session({
     secret: process.env.SECRET_KEY,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: {
         secure: true,   // Set to true to send cookie only over HTTPS
         httpOnly: true  // Set to true to prevent client-side JavaScript access

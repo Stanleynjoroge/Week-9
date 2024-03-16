@@ -11,7 +11,9 @@ export const addProject = async (name, description) => {
                 description
             }
         });
+       
         return project;
+       
     } catch (error) {
         console.error("Error adding project:", error);
         throw error;

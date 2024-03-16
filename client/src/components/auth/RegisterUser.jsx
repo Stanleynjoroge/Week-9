@@ -34,6 +34,7 @@ const RegisterUser = () => {
       type="text"
       id="username"
       name="username"
+      placeholder="username"
       value={formData.username}
       onChange={handleChange}
     />
@@ -46,6 +47,7 @@ const RegisterUser = () => {
       type="email"
       id="email"
       name="email"
+      placeholder="user@example.com"
       value={formData.email}
       onChange={handleChange}
     />
@@ -57,6 +59,7 @@ const RegisterUser = () => {
       type="password"
       id="password"
       name="password"
+      aria-autocomplete="inline"
       value={formData.password}
       onChange={handleChange}
     />

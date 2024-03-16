@@ -16,13 +16,16 @@ router.get('/id')
 router.post("/", async (req, res) => {
   try {
     const { name, description } = req.body;
-    await addProject(name, description);
-    res.status(201).send({ message: "Project added successfully" });
+   
+    const project = await addProject(name, description);
+    res.status(201).send({ status: 'success', project });
+    
   } catch (error) {
     console.error("Error adding project:", error);
-    res.status(500).send({ error: "Internal server error" });
+    res.status(500).send({ status: 'fail', error: "Internal server error" });
   }
 });
+
 router.delete("/", async (req, res) => {
   try {
     const projectId = parseInt(req.query.id); // Extract project ID from request parameters
