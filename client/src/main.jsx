@@ -11,6 +11,8 @@ import Tickets from "./components/pages/Tickets.jsx";
 import {Provider} from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from "./components/stores/store.js";
+import SingleProject ,{projectLoader} from "./components/pages/SingleProject";
+import SingleTicket ,{ ticketLoader } from "./components/pages/SingleTicket";
 const router = createBrowserRouter([
   { 
   path: "/", 
@@ -33,24 +35,35 @@ const router = createBrowserRouter([
         element:<Dashboard/>
       },
       {
+        path: "Dashboard/:projectId",
+        element: <SingleProject/>,
+        loader: projectLoader
+      },
+
+      {
         path: 'Tasks',
         element: <Tasks/>
       },
       {
         path:"Tickets",
         element: <Tickets/>
+      },
+      {
+        path: "Tickets/:ticketId",
+        element: <SingleTicket/>,
+        loader: ticketLoader
       }
     ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+ 
     <Provider store={store}>
     <PersistGate loading={<h1>lodinding...</h1>} persistor={persistor}>
     <RouterProvider router={router} /> 
     </PersistGate>
     </Provider>
     
-  </React.StrictMode>
+ 
 );

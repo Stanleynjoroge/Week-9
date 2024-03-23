@@ -3,8 +3,7 @@
   max-width: 1280px;
   margin: 0 auto;
   background-color: #213547;
-  text-align: center;
-  gap: 5px;
+  gap: .5rem;
 
   line-height: 1.5;
   font-weight: 400;
@@ -49,9 +48,13 @@ code {
 html,
 body {
   height: 100%;
+  width:100%;
   margin: 0;
   line-height: 1.5;
   color: #121212;
+  display: flex;
+
+  
 }
 #root {
   display: flex;
@@ -59,21 +62,18 @@ body {
   width: 100%;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
 }
 
 #navbar{
   display: flex;
   width: 98vw;
-  height:30vh;
+  height:25vh;
   background-color: #fcfafa;
   margin:0;
   border-radius: .8em;
   justify-content: space-around;
   align-items: center;
   flex-direction: column;
-  z-index: 999;
-  position: fixed;
 
 }
 #navbar > *{
@@ -103,9 +103,7 @@ body {
   border-bottom: 1px solid #e3e3e3;
 }
 
-#navbar > div form {
-  position: relative;
-}
+
 
 #navbar > div form input[type="search"] {
   width: 100%;
@@ -115,6 +113,7 @@ body {
   background-position: 0.625rem 0.75rem;
   background-size: 1rem;
   position: relative;
+  
 }
 
 #navbar > div form input[type="search"].loading {
@@ -173,20 +172,21 @@ body {
   align-self:flex-end;
   justify-self:flex-end;
   width: 98vw;
-  height: 620px;
-  margin-top: 12rem;
+  height: 70vh;
+  
 
 }
 #sidebar{
   display: flex;
   flex-direction: column;
   width :300px;
-  height: auto;
+  height: 100%;
   border-radius: .8em;
   background-color: rgb(247, 249, 249);
   padding-top:1rem;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0.5em  1.3em;
   justify-content: space-around;
+  overflow-y: scroll;
 }
 #sidebar input
 {
@@ -218,6 +218,16 @@ body {
 #home ul{
   display: flex;
   text-align: left;
+  position: relative;
+}
+#projects{
+  display: flex;
+  flex-direction: column-reverse;
+  align-content: center;
+  width: auto;
+  height: fit-content;
+  max-height:50px;
+  overflow-y: scroll;
 }
 #profile{
   display: flex;
@@ -241,11 +251,12 @@ body {
 
 #detail{
   width:80vw;
-  height:auto; ;
+  height:100%; 
   background-color: #f9f9f9;
   border-radius: .8em;
   position:static;
   box-shadow: rgba(171, 97, 97, 0.1) 0px 6px 20px 0px;
+  
 }
 
 #detail.loading {

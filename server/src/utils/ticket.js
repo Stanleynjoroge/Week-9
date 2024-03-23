@@ -3,10 +3,11 @@
 import  {PrismaClient} from '@prisma/client'
 const prisma = new PrismaClient()
 // Function to add a new project
-export const addProject = async (name, description) => {
+export const addProject = async (id,name, description) => {
     try {
         const project = await prisma.project.create({
             data: {
+                id,
                 name,
                 description
             }
@@ -35,10 +36,11 @@ export const deleteProject = async (projectId) => {
 };
 
 // Function to add a new bug
-export const addTickect = async (title, description, projectId) => {
+export const addTickect = async (id,title, description, projectId) => {
     try {
         const ticket= await prisma.ticket.create({
             data: {
+                id,
                 title,
                 description,
                 status: "TO_DO",

@@ -14,7 +14,6 @@ function Root() {
     const token = localStorage.getItem("token");
       if(token){
         setLoggedIn(true)
-        console.log(token)
       } else{
         setLoggedIn(false)
       }
@@ -28,6 +27,7 @@ function Root() {
       "/Home/Dashboard": "Dashboard",
       "/Home/Tickets": "Tickets",
       "/Home/Tasks": "Tasks",
+      "/Home/Dashboard/:projectId":"Projects"
     };
 
     // Set the page title based on the current route
@@ -63,7 +63,7 @@ function Root() {
         <div id="sidebar">
         
           <div id="home">
-          <hr/>
+            <hr />
             <h1>Home</h1>
             <nav>
                 <ul> <Link to={"Dashboard"} >Dashbord</Link></ul>
@@ -72,20 +72,25 @@ function Root() {
             </nav>
             </div>
             <div id="home">
-            <hr/>
+              <hr />
               <h1>Projects</h1>
               <Form method="post">
-                <input placeholder="New project +"></input>
+                <input placeholder="New project +">
+
+                </input>
               </Form>
+              <div id="projects">
               <nav>
                 <Link to={``}>
                   <i>No projects</i>
                 </Link>
               </nav>
-            
+              </div>
+              <hr />
             </div>
            
             <div id="profile">
+          
             <h1>Profile</h1>
             <div>
                 <img src="" alt="pic" />

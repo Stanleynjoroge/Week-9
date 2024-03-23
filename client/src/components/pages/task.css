@@ -1,24 +1,29 @@
 #task {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    justify-content: center;
     justify-content: space-between;
-    height: 98%;
+    height:100%;
     width: 98%;
+    padding-bottom: 1rem;
     padding-left: 1rem;
-
 }
 
-#slot {
+.slot {
     display: flex;
-    align-items: center;
     flex-direction: column;
-    height: 98%;
+    height: 100%;
     width: 300px;
+    justify-content: space-between;
+    align-items: center;
+    overflow-y: scroll;
+    padding-bottom: 1rem;
 
+
+    
 }
 
-#slot h3 {
+.slot h3 {
     background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>');
     background-position: 7rem;
     background-repeat: no-repeat;
@@ -28,4 +33,49 @@
     text-align: justify;
     width: 150px;
     padding-left: .6em;
+    position: fixed;
+ 
+}
+.cards{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 200px;
+    width: 200px;
+    overFlow: hidden;
+    border: #535bf2;
+    border-radius:.8em;
+    box-shadow: -10px 10px 10px rgba(0,0,0,.2);
+}
+.cards h4{
+    font-weight: normal;
+    background-color: cadetblue;
+    border-radius: .8em;
+    text-align: justify;
+    width: 150px;
+    padding-left: .6em;
+}
+.cards p{
+    font-size: small;
+    text-align: justify;
+    width: 150px;
+    padding-left: .6em;
+}
+.cards:hover{
+    transform: scale(1.05) rotate(-5deg);
+    transition: all .8s ease-in-out;
+    height: 210px;
+    width: 210px;
+    background-color: #535bf2;
+    cursor: grab;
+}
+
+.task-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 4rem;
+    gap:  .7rem;
+    height: fit-content;
+    width:100%; 
 }

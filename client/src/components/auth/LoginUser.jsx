@@ -42,7 +42,7 @@ const LoginUser = () => {
   return (
     
         <>
-        {loggedIn? <Navigate  to="/Home" /> : null}
+        {loggedIn ? <Navigate  to="/Home" /> : null}
           <form onSubmit={handleSubmit} className="form">
             <div>
               <label htmlFor="username">Username:</label>

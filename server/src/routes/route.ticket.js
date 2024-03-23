@@ -4,21 +4,51 @@ import  {PrismaClient} from '@prisma/client'
 const prisma = new PrismaClient()
 const router = express.Router();
 
+router.get( '/', async (req, res) =>{
+    const tickets= await prisma.ticket.findMany({})
+    return res.status(200).json(tickets);
+});
 
+router.get('/:ticketId', async(req,res)=>{
+    try {
+        const ticketId = req.params.ticketId;
+        if (ticketId) {
+          const ticket = await prisma.ticket.findUnique({
+            where: {
+              id: ticketId
+            }
+          });
+          
+          if (!ticket) {
+            return res.status(404).json({ message: 'Ticket not found' });
+          }
+    
+          res.json(ticket);
+        } else {
+          // Handle if no projectId is provided
+          res.status(400).json({ message: 'Please provide a ticket ID' });
+        }
+      } catch (error) {
+        console.log(error);
+        res.status(500).send("Internal server error: " + error);
+      }
+})
+//@desc Add a ticket
 router.post('/', async(req,res)=>{
     try{
-        const getProject= await prisma.project.findMany({
-            where:{
-                name: req.body.project.name
-            }
-        })
-     console.log (getProject)
-        //if the project doesnt exist then return an error
-        if(!getProject) {return res.status(400).send('The Project does not Exist')};
+    //     const getProject= await prisma.project.findMany({
+    //         where:{
+    //             name: req.body.project.name
+    //         }
+    //     })
+    //  console.log (getProject)
+    //     //if the project doesnt exist then return an error
+    //     if(!getProject) {return res.status(400).send('The Project does not Exist')};
 
-        const projectId  = getProject[0].id 
-        const{title, description} = req.body;
+        // const projectId  = getProject[0].id 
+        const{id,title, description,projectId} = req.body;
         await addTickect(
+            id,
             title,
             description,
             projectId 
@@ -32,7 +62,7 @@ router.post('/', async(req,res)=>{
 })
 
 router.delete('/', async (req, res) => {
-    const ticketId = parseInt(req.query.id);
+    const ticketId = req.query.id;
 
     try {
         await deleteTicket(ticketId);
@@ -44,7 +74,7 @@ router.delete('/', async (req, res) => {
 });
 router.patch('/' ,async(req,res)=>{
         try {
-            const ticketId= parseInt(req.query.id)
+            const ticketId= req.query.id
             const newData = req.body
             await  updateTicket(ticketId,newData)
             
