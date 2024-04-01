@@ -30,13 +30,13 @@ model Ticket {
   // Define assignees as a many-to-many relation to User model
   assignees User[] @relation("AssignedTickets")
 
-  createdByUser   User? @relation("CreatedTickets", fields: [createdByUserId], references: [id])
-  createdByUserId Int?
+  User   User?   @relation("CreatedTickets", fields: [UserId], references: [id])
+  UserId String?
 }
 
 // Define a model for the User table
 model User {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(uuid())
   username  String   @unique
   email     String   @unique
   password  String
@@ -74,7 +74,7 @@ model Comment {
   ticket   Ticket @relation(fields: [ticketId], references: [id])
   ticketId String
   user     User   @relation(fields: [userId], references: [id])
-  userId   Int
+  userId   String
 }
 
 // Define the TicketStatus enum

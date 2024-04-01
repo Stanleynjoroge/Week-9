@@ -12,7 +12,7 @@ import {Provider} from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from "./components/stores/store.js";
 import SingleProject ,{projectLoader} from "./components/pages/SingleProject";
-import SingleTicket ,{ ticketLoader } from "./components/pages/SingleTicket";
+import SingleTicket ,{ ticketLoader } from "./components/pages/SingleTicket.jsx";
 const router = createBrowserRouter([
   { 
   path: "/", 
@@ -60,7 +60,7 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
  
     <Provider store={store}>
-    <PersistGate loading={<h1>lodinding...</h1>} persistor={persistor}>
+    <PersistGate loading={<h1>louding...</h1>} persistor={persistor}>
     <RouterProvider router={router} /> 
     </PersistGate>
     </Provider>

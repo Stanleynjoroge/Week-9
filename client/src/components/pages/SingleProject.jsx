@@ -8,8 +8,11 @@ import { saveTicketData, deleteTicketData } from "../stores/actions";
 import "./singleProject.css";
 
 export const projectLoader = async ({ params }) => {
+  const API = axios.create({
+    baseURL: "http://localhost:5000",
+    withCredentials: true,})
   try {
-    const response = await axios.get(
+    const response = await API.get(
       `http://localhost:5000/project/${params.projectId}`
     );
 

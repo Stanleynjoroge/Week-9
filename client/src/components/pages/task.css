@@ -42,7 +42,10 @@
     align-items: center;
     height: 200px;
     width: 200px;
-    overFlow: hidden;
+    justify-content: space-between;
+    padding-right: .8rem;
+    padding-bottom: .8rem;
+    
     border: #535bf2;
     border-radius:.8em;
     box-shadow: -10px 10px 10px rgba(0,0,0,.2);
@@ -60,6 +63,10 @@
     text-align: justify;
     width: 150px;
     padding-left: .6em;
+    font-size: small;
+    overflow: hidden;   
+    text-overflow: ellipsis;
+    text-size-adjust:calc(100% - 5ch);
 }
 .cards:hover{
     transform: scale(1.05) rotate(-5deg);
@@ -68,6 +75,15 @@
     width: 210px;
     background-color: #535bf2;
     cursor: grab;
+}
+.cards img{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    border: 2px solid black;
+    place-self: end;
+
+
 }
 
 .task-container{

@@ -12,6 +12,25 @@ import {PrismaClient} from '@prisma/client';
 const prisma = new PrismaClient();
 
 // Register user route
+router.get( '/user', async(req, res) =>{
+
+    try {
+        const user = await prisma.user.findMany({
+           select: {
+               id: true,  
+               username: true,  
+               email:true 
+            }
+            
+        });
+        res.json(user);
+        console.log(user)
+        
+    } catch (error) {
+        res.status(500).json({ message: 'Server error' });
+    }
+   
+})
 router.post('/',checkSchema(registrationSchema), validateSchema, async (req, res) => {
     const data = req.data
     try {

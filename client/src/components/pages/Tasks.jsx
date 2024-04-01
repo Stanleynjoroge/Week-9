@@ -104,8 +104,11 @@ const Tasks = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      const API = axios.create({
+        baseURL: "http://localhost:5000",
+        withCredentials: true,})
       try {
-        const response = await axios.get("http://localhost:5000/ticket");
+        const response = await API.get("http://localhost:5000/ticket");
         const data = response.data;
         setTodo(data.filter((ticket) => ticket.status === "TO_DO"));
         setOngoing(data.filter((ticket) => ticket.status === "ONGOING"));
@@ -121,7 +124,7 @@ const Tasks = () => {
 
   const handleDragAndDrop = (results) => {
     const { source, destination, type } = results;
-    console.log(results);
+    
     if (!destination) return;
 
     if (
@@ -237,7 +240,7 @@ const Tasks = () => {
   };
 
 
-  {console.log({todo})}
+
 
   return (
     <div id="task">
@@ -266,6 +269,7 @@ const Tasks = () => {
                       >
                         <h4>{ticket.title}</h4>
                         <p>{ticket.description}</p>
+                        <img src={`https://robohash.org/${ticket.UserId}.png`}  alt="" />
                       </div>
                     )}
                   </Draggable>
@@ -299,6 +303,7 @@ const Tasks = () => {
                       >
                         <h4>{ticket.title}</h4>
                         <p>{ticket.description}</p>
+                        <img src={`https://robohash.org/${ticket.UserId}.png`}  alt="" />
                       </div>
                     )}
                   </Draggable>
@@ -332,6 +337,7 @@ const Tasks = () => {
                       >
                         <h4>{ticket.title}</h4>
                         <p>{ticket.description}</p>
+                        <img src={`https://robohash.org/${ticket.UserId}.png`}  alt="" />
                       </div>
                     )}
                   </Draggable>

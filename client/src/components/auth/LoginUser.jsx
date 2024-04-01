@@ -15,19 +15,29 @@ const LoginUser = () => {
   });
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const API = axios.create({
+      baseURL: "http://localhost:5000",
+      withCredentials: true,
+    });
 
     try {
-      const response = await axios.post("http://localhost:5000/login", formData);
+      const response = await API.post("/login", formData);
       console.log("Login successful:", response.data);
-
+      const getCookie = (name) => {
+        const cookieValue = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+        return cookieValue ? cookieValue.pop() : '';
+      };
+      const token = getCookie("valid_token");
+    if (token) {
+      setLoggedIn(true);
+    }
       setFormData({
         username: "",
         email: "",
         password: "",
         role: "",
       });
-      localStorage.setItem('token',response.data.token);
-      setLoggedIn(true);
+     
   
     } catch (error) {
       console.error("Error logging in:", error);
